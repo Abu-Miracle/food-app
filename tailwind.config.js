@@ -8,6 +8,10 @@ module.exports = {
       fontFamily: {
         'sans': ['Poppins', 'ui-sans-serif', 'system-ui'],
       },
+      colors: {
+        'lily-green': 'var(--lily-green)',
+        'lily-light': 'var(--lily-light)',
+      }
     },
   },
   plugins: [],

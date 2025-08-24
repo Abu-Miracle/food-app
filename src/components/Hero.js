@@ -13,7 +13,7 @@ export default function Hero() {
           Browse from our list of specials to place your order and have food
           delivered to you in no time. Affordable, tasty and fast!
         </div>
-        <div className="space-x-6">
+        <div className="space-x-6 flex">
           <GooglePlayBtn />
           <AppStoreBtn />
         </div>
