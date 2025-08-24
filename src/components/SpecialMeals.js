@@ -18,10 +18,9 @@ export default function SpecialMeals() {
   ];
 
   return (
-    <div className="flex flex-col justify-center text-center items-center py-10 px-20">
-        
+    <div className="flex flex-col justify-center text-center items-center py-10 px-10 md:px-24">
       <div className="max-w-[500px] md:max-w-[700px] mb-14">
-        <h1 className="text-white/85 text-2xl md:text-4xl mb-5 md:mb-10 font-bold">
+        <h1 className="text-white/85 text-2xl md:text-[34px] mb-5 md:mb-10 font-bold">
           Special Meals of the Day!
         </h1>
         <p className="text-white/80 text-sm md:text-lg/7 mb-7">
@@ -30,16 +29,23 @@ export default function SpecialMeals() {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 gap-14">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-14 md:gap-24 mb-10">
         {special_meals.map((meal, index) => (
-          <div key={index} className="flex flex-col justify-center items-center">
+          <div
+            key={index}
+            className="flex flex-col md:justify-center md:items-center"
+          >
             <img
               src={meal.image}
               alt={meal.name}
-              className="w-60 lg:w-[300px] h-60 lg:h-[300px] rounded-full object-cover"
+              className="w-[80vw] lg:w-[270px] h-80 lg:h-[270px] rounded-xl lg:rounded-full object-cover"
             />
-            <h1 className="text-white/85 font-bold text-2xl my-5">{meal.name}</h1>
-            <p className="text-white/75 text-[18px]/7">{meal.description}</p>
+            <h1 className="text-[--lily-light] font-black text-xl md:font-bold md:text-[24px] mt-3 mb-1 md:mb-5 md:mt-5 text-left lg:text-center">
+              {meal.name}
+            </h1>
+            <p className="text-white/75 md:text-[17px]/7 text-left lg:text-center">
+              {meal.description}
+            </p>
           </div>
         ))}
       </div>

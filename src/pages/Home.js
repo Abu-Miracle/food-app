@@ -1,6 +1,8 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import SpecialMeals from "../components/SpecialMeals";
+import Updates from "../components/Updates";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -8,6 +10,8 @@ export default function Home() {
       <Navbar />
       <Hero />
       <SpecialMeals />
+      <Updates />
+      <Footer />
     </div>
   );
 }
