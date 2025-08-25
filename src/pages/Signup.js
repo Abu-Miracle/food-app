@@ -11,7 +11,7 @@ export default function SIgnUp() {
       <div className="absolute md:relative w-full h-full md:w-[50vw] md:h-auto">
         <img
           src="/images/signupImage.svg"
-          alt="Login-Image"
+          alt="Signup-Image"
           className="w-full h-full object-top object-cover"
         />
       </div>
