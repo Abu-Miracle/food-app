@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
-export default function SIgnUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
