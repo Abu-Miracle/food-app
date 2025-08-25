@@ -10,7 +10,7 @@ export default function Dashboard() {
     {
       name: "Pork Sandwich",
       description: "The in-house pork sandwich by Chef Moose",
-      price: "N1000.00",
+      price: "N1800.00",
       image: "/images/hero_food.jpg",
     },
     {
