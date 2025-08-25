@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="flex h-[100vh]">
-      <div className="w-[50vw]">
+    <div className="relative flex h-[100vh] md:flex-row">
+      <div className="absolute md:relative w-full h-full md:w-[50vw] md:h-auto">
         <img
           src="/images/loginImage.svg"
           alt="Login-Image"
@@ -14,13 +16,22 @@ export default function Login() {
         />
       </div>
 
-      <div className="flex justify-center items-center w-[50vw] text-center">
+      <div className="relative z-10 flex justify-center items-center w-full md:w-[50vw] bg-white/25 md:bg-transparent">
+        <div className="absolute top-4 left-4 md:left-8 md:top-8 z-20">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center text-lily-green border-[1px] border-lily-green justify-center rounded-full w-8 h-8"
+          >
+            <ArrowLeft size={16} className="" />
+          </button>
+        </div>
+
         <form
           action=""
           method="post"
           className="flex flex-col w-[75%] justify-center"
         >
-          <h1 className="text-[--lily-green] font-[600] text-[28px] mb-14">
+          <h1 className="text-[--lily-green] font-[600] text-[28px] text-center mb-10 md:mb-14">
             Welcome Back!
           </h1>
 
@@ -44,14 +55,15 @@ export default function Login() {
             </button>
           </div>
 
-          <button
+          <Link
+            to="/dashboard"
             type="submit"
-            className="w-full bg-lily-green text-lily-light font-semibold py-5 rounded hover:bg-lily-green/60"
+            className="w-full bg-lily-green text-lily-light font-semibold py-5 rounded hover:bg-lily-green/60 text-center"
           >
             LOGIN
-          </button>
+          </Link>
 
-          <div className="w-full justify-between flex text-lily-green font-normal text-[15px] mt-8">
+          <div className="w-full justify-between flex text-lily-green font-medium md:font-normal text-sm md:text-[15px] mt-4 md:mt-8">
             <Link to="/signup">Create an account</Link>
             <Link to="/"> Forgot Password?</Link>
           </div>

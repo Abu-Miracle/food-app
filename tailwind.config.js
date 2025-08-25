@@ -11,6 +11,7 @@ module.exports = {
       colors: {
         'lily-green': 'var(--lily-green)',
         'lily-light': 'var(--lily-light)',
+        'lily-sun': 'var(--lily-sun)',
       }
     },
   },
