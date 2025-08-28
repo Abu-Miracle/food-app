@@ -1,11 +1,9 @@
-import { HomeIcon } from "lucide-react";
 import { FaHome, FaUser, FaShoppingCart, FaCalendar } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import Modal from "./Modal";
 import SideModal from "./SideModal";
-import { type } from "@testing-library/user-event/dist/type";
 import { meals } from "../meals";
 
 export default function Menu() {
@@ -61,7 +59,7 @@ export default function Menu() {
   };
 
   let total = 0;
-  meals.slice(0, 4).forEach(meal => {
+  meals.slice(0, 4).forEach((meal) => {
     total += meal.price * meal.quantity;
   });
 
@@ -129,7 +127,7 @@ export default function Menu() {
             Your Cart
           </div>
           <div className="bg-yellow-300 w-6 h-6 text-black/70 items-center justify-center flex font-semibold text-sm rounded-full">
-            3
+            4
           </div>
         </div>
 
@@ -184,14 +182,81 @@ export default function Menu() {
         onClose={closeOrdersModal}
         title="Your Orders"
       >
-        <div>
-          <p>Your recent orders:</p>
-          <div className="mt-4 space-y-2">
-            <div className="p-3 border rounded">Order #001 - Pork Sandwich</div>
-            <div className="p-3 border rounded">
-              Order #002 - Mac and Cheese
-            </div>
+        <div className="px-16">
+          <div className="hidden md:grid grid-cols-10 gap-8 text-sm py-8 items-center">
+            <div className="col-span-5 ">Items</div>
+            <div className="col-span-1 text-center">Qty</div>
+            <div className="col-span-2 text-center">Price</div>
+            <div className="col-span-2 text-center">Status</div>
           </div>
+
+          {meals.slice(0, 4).map((meal, index) => (
+            <div key={index}>
+              <div className="hidden md:grid grid-cols-10 gap-8 items-center py-4">
+                <div className="col-span-5 flex items-center">
+                  <img
+                    src={meal.image}
+                    alt="meal-image"
+                    className="w-16 h-16 rounded-full object-cover mr-3 object-center flex-shrink-0"
+                  />
+                  <div>
+                    <h1 className="text-lily-green font-[500] text-lg">
+                      {meal.name}
+                    </h1>
+                    <p className="text-xs text-red-600">Remove</p>
+                  </div>
+                </div>
+                <div className="col-span-1 text-center font-bold text-lily-green">
+                  {meal.quantity}
+                </div>
+                <div className="col-span-2 text-center font-bold text-lily-green tracking-wide">
+                  N{meal.price.toLocaleString()}.00
+                </div>
+                <div
+                  className={`col-span-2 text-center font-medium tracking-wide ${meal.status === "delivered" ? "text-green-600" : "text-red-500"}`}
+                >
+                  {meal.status === "delivered" ? "Delivered" : "Cooking"}
+                </div>
+              </div>
+
+              <div className="block md:hidden bg-gray-50 rounded-lg p-4 mb-4">
+                <div className="flex items-center mb-3">
+                  <img
+                    src={meal.image}
+                    className="w-16 h-16 rounded-full object-cover mr-3 flex-shrink-0"
+                  />
+                  <div className="flex-1">
+                    <h1 className="text-lily-green font-[500] text-lg">
+                      {meal.name}
+                    </h1>
+                    <p className="text-xs text-red-600">Remove</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-4 text-sm">
+                  <div className="text-center">
+                    <span className="block text-gray-500 mb-1">Qty</span>
+                    <span className="font-bold text-lily-green">
+                      {meal.quantity}
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <span className="block text-gray-500 mb-1">Price</span>
+                    <span className="font-bold text-lily-green">
+                      N{meal.price.toLocaleString()}.00
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <span className="block text-gray-500 mb-1">Status</span>
+                    <span
+                      className={`font-medium ${meal.status === "delivered" ? "text-green-600" : "text-red-500"}`}
+                    >
+                      {meal.status === "delivered" ? "Delivered" : "Cooking"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </SideModal>
 
@@ -200,46 +265,89 @@ export default function Menu() {
         onClose={closeCartModal}
         title="Your Cart"
       >
-        <div className="px-16">
-          <div className="flex gap-12 text-sm py-8">
-            <div className="w-[70%] text-nowrap pl-2 pr-10">Items</div>
-            <div className="w-[5%] text-nowrap">Qty</div>
-            <div className="w-[12.5%] text-nowrap">Unit Price</div>
-            <div className="w-[12.5%] text-nowrap">Sub-total</div>
+        <div className="px-4 md:px-16">
+          <div className="hidden md:grid grid-cols-10 gap-8 text-sm py-8 items-center">
+            <div className="col-span-5 pl-2">Items</div>
+            <div className="col-span-1 text-center">Qty</div>
+            <div className="col-span-2 text-center">Unit Price</div>
+            <div className="col-span-2 text-center">Sub-total</div>
           </div>
 
           {meals.slice(0, 4).map((meal, index) => (
-            <div key={index} className="flex gap-12 mb-14">
-              <div className="w-[70%] flex pr-10">
-                <img
-                  src={meal.image}
-                  alt="meal-image"
-                  className="w-16 h-16 rounded-full object-cover mr-3 object-center flex-shrink-0"
-                />
-                <div className="flex flex-col">
-                  <h1 className="text-lily-green font-[500] text-lg">
-                    {meal.name}
-                  </h1>
-                  <p className="text-xs text-red-600">Remove</p>
+            <div key={index} className="mb-8 md:mb-4">
+              <div className="block md:hidden">
+                <div className="flex items-center mb-3">
+                  <img
+                    src={meal.image}
+                    className="w-16 h-16 rounded-full object-cover mr-3 flex-shrink-0"
+                  />
+                  <div className="flex-1">
+                    <h1 className="text-lily-green font-[500] text-lg">
+                      {meal.name}
+                    </h1>
+                    <p className="text-xs text-red-600">Remove</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-4 text-sm">
+                  <div className="text-center">
+                    <span className="block text-gray-500 mb-1">Qty</span>
+                    <span className="font-bold text-lily-green">
+                      {meal.quantity}
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <span className="block text-gray-500 mb-1">Price</span>
+                    <span className="font-bold text-lily-green">
+                      N{meal.price.toLocaleString()}.00
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <span className="block text-gray-500 mb-1">Sub-total</span>
+                    <span className="font-bold text-lily-green">
+                      N{(meal.quantity * meal.price).toLocaleString()}.00
+                    </span>
+                  </div>
                 </div>
               </div>
-              <div className="w-[5%] text-nowrap font-bold text-lily-green">
-                {meal.quantity}
-              </div>
-              <div className="w-[12.5%] text-nowrap font-bold text-lily-green tracking-wide">
-                N{(meal.price).toLocaleString()}.00
-              </div>
-              <div className="w-[12.5%] text-nowrap font-bold text-lily-green tracking-wide">
-                N{(meal.quantity * meal.price).toLocaleString()}.00
+
+              <div className="hidden md:grid grid-cols-10 gap-8 items-center py-4">
+                <div className="col-span-5 flex items-center">
+                  <img
+                    src={meal.image}
+                    alt="meal-image"
+                    className="w-16 h-16 rounded-full object-cover mr-3 object-center flex-shrink-0"
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="text-lily-green font-[500] text-lg">
+                      {meal.name}
+                    </h1>
+                    <p className="text-xs text-red-600">Remove</p>
+                  </div>
+                </div>
+                <div className="col-span-1 text-center font-bold text-lily-green">
+                  {meal.quantity}
+                </div>
+                <div className="col-span-2 text-center font-bold text-lily-green tracking-wide">
+                  N{meal.price.toLocaleString()}.00
+                </div>
+                <div className="col-span-2 text-center font-bold text-lily-green tracking-wide">
+                  N{(meal.quantity * meal.price).toLocaleString()}.00
+                </div>
               </div>
             </div>
           ))}
 
-          <div className="flex space-x-7 -mr-4 justify-end">
-            <h1 className="text-black/70 text-lg font-semibold tracking-tight">Total:</h1>
-            <h1 className="text-xl text-lily-green font-bold">N{(total).toLocaleString()}.00</h1>
+          <div className="flex space-x-7 mr-8 md:-mr-4 justify-end">
+            <h1 className="text-black/70 text-lg font-semibold tracking-tight">
+              Total:
+            </h1>
+            <h1 className="text-xl text-lily-green font-bold">
+              N{total.toLocaleString()}.00
+            </h1>
           </div>
-          <button className="bg-lily-green font-semibold rounded text-lily-light block mx-auto py-4 text-sm w-[80%] mt-10">Checkout</button>
+          <button className="bg-lily-green font-semibold rounded text-lily-light block mx-auto py-4 text-sm w-[80%] mt-10 mb-16">
+            Checkout
+          </button>
         </div>
       </SideModal>
     </div>

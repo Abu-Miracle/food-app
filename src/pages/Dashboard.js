@@ -8,8 +8,10 @@ export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function truncateText(text, maxLength = 45) {
-      if (!text) return '';
-      return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+    if (!text) return "";
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
   }
 
   return (
@@ -18,11 +20,7 @@ export default function Dashboard() {
         className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        {isMenuOpen ? (
-          <X className="bg-[#FBFBFB] border-none" size={24} />
-        ) : (
-          <AlignJustify size={24} className="bg-white" />
-        )}
+        {!isMenuOpen && <AlignJustify size={24} className="bg-white" />}
       </button>
 
       <div
@@ -57,10 +55,13 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        <div className="flex justify-center px-8 lg:px-16 mt-20 pb-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl w-full justify-items-center">
+        <div className="flex justify-center px-10 lg:px-16 mt-20 pb-10">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl w-full justify-items-center">
             {meals.map((meal, index) => (
-              <div key={index} className="flex flex-col items-center">
+              <div
+                key={index}
+                className="flex flex-col cursor-pointer py-4 px-2 rounded hover:bg-gray-100 items-center"
+              >
                 <img
                   src={meal.image}
                   alt="food-item"
@@ -74,7 +75,9 @@ export default function Dashboard() {
                 </p>
 
                 <div className="text-sm font-semibold mt-6 flex justify-between w-full">
-                  <p className="text-lily-green">N{(meal.price).toLocaleString()}.00</p>
+                  <p className="text-lily-green">
+                    N{meal.price.toLocaleString()}.00
+                  </p>
                   <p className="text-[#1c9e5d]">Add to Cart</p>
                 </div>
               </div>
