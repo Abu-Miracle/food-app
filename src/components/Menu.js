@@ -190,7 +190,7 @@ export default function Menu() {
             <div className="col-span-2 text-center">Status</div>
           </div>
 
-          {meals.slice(0, 4).map((meal, index) => (
+          {meals.slice(2, 6).map((meal, index) => (
             <div key={index}>
               <div className="hidden md:grid grid-cols-10 gap-8 items-center py-4">
                 <div className="col-span-5 flex items-center">
