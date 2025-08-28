@@ -337,7 +337,7 @@ export default function Menu() {
             </div>
           ))}
 
-          <div className="flex space-x-7 mr-8 md:-mr-4 justify-end">
+          <div className="flex space-x-7 mr-8 md:mr-0 justify-end">
             <h1 className="text-black/70 text-lg font-semibold tracking-tight">
               Total:
             </h1>
