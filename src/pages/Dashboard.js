@@ -2,49 +2,15 @@ import { useState } from "react";
 import { AlignJustify, X } from "lucide-react";
 import Menu from "../components/Menu";
 import { Link } from "react-router-dom";
+import { meals } from "../meals";
 
 export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  let meals = [
-    {
-      name: "Pork Sandwich",
-      description: "The in-house pork sandwich by Chef Moose",
-      price: "N1800.00",
-      image: "/images/hero_food.jpg",
-    },
-    {
-      name: "Stir fry Pasta",
-      description: "The in-house stir fry pasta by Chef Andre",
-      price: "N3200.00",
-      image: "/images/smeal1.jpg",
-    },
-    {
-      name: "Meatballs",
-      description: "The in-house meatballs by Chef Andre",
-      price: "N3400.00",
-      image: "/images/smeal2.jpg",
-    },
-    {
-      name: "Hamburgers",
-      description: "Crispy chicken paddies tossed in spicy buffalo sauce",
-      price: "N4600.00",
-      image: "/images/smeal3.jpg",
-    },
-    {
-      name: "Blueberry Pancake",
-      description: "The infamous blueberry by Chef Monica",
-      price: "N2900.00",
-      image: "/images/smeal4.jpg",
-    },
-    {
-      name: "Mac and Cheese",
-      description:
-        "Rich and creamy cheesecake with graham cracker crust, topped with fresh berry compote",
-      price: "N3800.00",
-      image: "/images/smeal5.jpg",
-    },
-  ];
+  function truncateText(text, maxLength = 45) {
+      if (!text) return '';
+      return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+  }
 
   return (
     <div className="flex h-screen">
@@ -104,11 +70,11 @@ export default function Dashboard() {
                   {meal.name}
                 </h1>
                 <p className="text-black/70 text-[12px] w-44  text-center">
-                  {meal.description}
+                  {truncateText(meal.description)}
                 </p>
 
                 <div className="text-sm font-semibold mt-6 flex justify-between w-full">
-                  <p className="text-lily-green">{meal.price}</p>
+                  <p className="text-lily-green">N{(meal.price).toLocaleString()}.00</p>
                   <p className="text-[#1c9e5d]">Add to Cart</p>
                 </div>
               </div>

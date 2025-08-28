@@ -3,10 +3,45 @@ import { FaHome, FaUser, FaShoppingCart, FaCalendar } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
+import Modal from "./Modal";
+import SideModal from "./SideModal";
+import { type } from "@testing-library/user-event/dist/type";
+import { meals } from "../meals";
 
 export default function Menu() {
   const [activeItem, setActiveItem] = useState("Dashboard");
   const navigate = useNavigate();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({});
+
+  const [isOrdersModalOpen, setIsOrdersModalOpen] = useState(false);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+
+  const openModal = (content) => {
+    setModalContent(content);
+    setIsLogoutModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsLogoutModalOpen(false);
+    setModalContent({});
+  };
+
+  const openOrdersModal = () => {
+    setIsOrdersModalOpen(true);
+  };
+
+  const closeOrdersModal = () => {
+    setIsOrdersModalOpen(false);
+  };
+
+  const openCartModal = () => {
+    setIsCartModalOpen(true);
+  };
+
+  const closeCartModal = () => {
+    setIsCartModalOpen(false);
+  };
 
   const handleItemClick = (item) => {
     setActiveItem(item);
@@ -14,22 +49,29 @@ export default function Menu() {
     if (item === "Your Profile") {
       navigate("/profile");
     } else if (item === "Log Out") {
-      const confirmLogout = window.confirm("Are you sure you want to log out?");
-      if (confirmLogout) {
-        localStorage.removeItem("authToken");
-        localStorage.removeItem("userInfo");
-
-        navigate("/");
-      } else {
-        setActiveItem("Dashboard");
-      }
+      openModal({
+        title: "Confirm Logout",
+        type: "logout",
+      });
+    } else if (item === "Orders") {
+      openOrdersModal();
+    } else if (item === "Your Cart") {
+      openCartModal();
     }
   };
+
+  let total = 0;
+  meals.slice(0, 4).forEach(meal => {
+    total += meal.price * meal.quantity;
+  });
+
   return (
     <div className="bg-[#FBFBFB] w-full md:w-[30vw] lg:w-[22vw] h-[100vh]">
       <div className="flex pt-20 justify-center items-center">
         <img src="/images/logo.svg" alt="lilies-logo" className="w-14 h-16" />
-        <h1 className="text-3xl font-bold text-lily-green ml-2 tracking-wider">Lilies</h1>
+        <h1 className="text-3xl font-bold text-lily-green ml-2 tracking-wider">
+          Lilies
+        </h1>
       </div>
 
       <div className="flex flex-col mt-20">
@@ -105,6 +147,101 @@ export default function Menu() {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={isLogoutModalOpen}
+        onClose={closeModal}
+        title={modalContent.title}
+      >
+        {modalContent.type === "logout" && (
+          <div className="px-2">
+            <p className="pt-2 py-5">Are you sure you want to Logout?</p>
+
+            <div className="flex justify-between ">
+              <button
+                className="rounded border-[1px] border-black/50 px-4 py-2"
+                onClick={closeModal}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-lily-green text-lily-light rounded px-4 py-2"
+                onClick={() => {
+                  localStorage.removeItem("authToken");
+                  navigate("/");
+                  closeModal();
+                }}
+              >
+                Log Out
+              </button>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      <SideModal
+        isOpen={isOrdersModalOpen}
+        onClose={closeOrdersModal}
+        title="Your Orders"
+      >
+        <div>
+          <p>Your recent orders:</p>
+          <div className="mt-4 space-y-2">
+            <div className="p-3 border rounded">Order #001 - Pork Sandwich</div>
+            <div className="p-3 border rounded">
+              Order #002 - Mac and Cheese
+            </div>
+          </div>
+        </div>
+      </SideModal>
+
+      <SideModal
+        isOpen={isCartModalOpen}
+        onClose={closeCartModal}
+        title="Your Cart"
+      >
+        <div className="px-16">
+          <div className="flex gap-12 text-sm py-8">
+            <div className="w-[70%] text-nowrap pl-2 pr-10">Items</div>
+            <div className="w-[5%] text-nowrap">Qty</div>
+            <div className="w-[12.5%] text-nowrap">Unit Price</div>
+            <div className="w-[12.5%] text-nowrap">Sub-total</div>
+          </div>
+
+          {meals.slice(0, 4).map((meal, index) => (
+            <div key={index} className="flex gap-12 mb-14">
+              <div className="w-[70%] flex pr-10">
+                <img
+                  src={meal.image}
+                  alt="meal-image"
+                  className="w-16 h-16 rounded-full object-cover mr-3 object-center flex-shrink-0"
+                />
+                <div className="flex flex-col">
+                  <h1 className="text-lily-green font-[500] text-lg">
+                    {meal.name}
+                  </h1>
+                  <p className="text-xs text-red-600">Remove</p>
+                </div>
+              </div>
+              <div className="w-[5%] text-nowrap font-bold text-lily-green">
+                {meal.quantity}
+              </div>
+              <div className="w-[12.5%] text-nowrap font-bold text-lily-green tracking-wide">
+                N{(meal.price).toLocaleString()}.00
+              </div>
+              <div className="w-[12.5%] text-nowrap font-bold text-lily-green tracking-wide">
+                N{(meal.quantity * meal.price).toLocaleString()}.00
+              </div>
+            </div>
+          ))}
+
+          <div className="flex space-x-7 -mr-4 justify-end">
+            <h1 className="text-black/70 text-lg font-semibold tracking-tight">Total:</h1>
+            <h1 className="text-xl text-lily-green font-bold">N{(total).toLocaleString()}.00</h1>
+          </div>
+          <button className="bg-lily-green font-semibold rounded text-lily-light block mx-auto py-4 text-sm w-[80%] mt-10">Checkout</button>
+        </div>
+      </SideModal>
     </div>
   );
 }
