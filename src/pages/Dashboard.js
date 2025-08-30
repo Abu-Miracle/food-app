@@ -33,6 +33,13 @@ export default function Dashboard() {
       : text;
   }
 
+  function truncateName(text, maxLength = 14) {
+    if (!text) return "";
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
+  }
+
   return (
     <div className="flex h-screen">
       <button
@@ -87,7 +94,7 @@ export default function Dashboard() {
                   className="w-36 h-36 rounded-full object-cover"
                 />
                 <h1 className="text-lily-green font-semibold text-xl my-3">
-                  {meal.name}
+                  {truncateName(meal.name)}
                 </h1>
                 <p className="text-black/70 text-[12px] w-44  text-center">
                   {truncateText(meal.description)}
