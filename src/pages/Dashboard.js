@@ -3,9 +3,28 @@ import { AlignJustify, X } from "lucide-react";
 import Menu from "../components/Menu";
 import { Link } from "react-router-dom";
 import { meals } from "../meals";
+import SideModal from "../components/SideModal";
 
 export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [selectedMeal, setSelectedMeal] = useState({});
+  const [value, setValue] = useState(0);
+
+  const closeDetailModal = () => {
+    setIsDetailModalOpen(false);
+    setSelectedMeal(null);
+  };
+
+  const increment = () => {
+    setValue(value + 1);
+  };
+
+  const decrement = () => {
+    if (value > 0) {
+      setValue(value - 1);
+    }
+  };
 
   function truncateText(text, maxLength = 45) {
     if (!text) return "";
@@ -60,7 +79,7 @@ export default function Dashboard() {
             {meals.map((meal, index) => (
               <div
                 key={index}
-                className="flex flex-col cursor-pointer py-4 px-2 rounded hover:bg-gray-100 items-center"
+                className="flex flex-col cursor-pointer py-4 px-4 items-center"
               >
                 <img
                   src={meal.image}
@@ -78,13 +97,123 @@ export default function Dashboard() {
                   <p className="text-lily-green">
                     N{meal.price.toLocaleString()}.00
                   </p>
-                  <p className="text-[#1c9e5d]">Add to Cart</p>
+                  <p
+                    className="text-[#1c9e5d] hover:text-lily-green hover:scale-105"
+                    onClick={() => {
+                      setSelectedMeal(meal);
+                      setIsDetailModalOpen(true);
+                    }}
+                  >
+                    Add to Cart
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      <SideModal isOpen={isDetailModalOpen} onClose={closeDetailModal} title="">
+        {selectedMeal && (
+          <div>
+            <div className="flex md:hidden justify-center items-center w-full flex-col px-14 pb-16">
+              <img
+                src={selectedMeal.image}
+                alt="meal-image"
+                className="w-60 h-60 mt-10 rounded-full object-cover flex-shrink-0"
+              />
+              <h1 className="text-lily-green font-semibold text-lg my-7">
+                {selectedMeal.name}
+              </h1>
+              <p className="text-black/70 text-[12px]/6 text-center">
+                {selectedMeal.description}
+              </p>
+
+              <div className="flex items-center justify-between w-full my-10 text-lily-green font-semibold text-lg">
+                <p className="text-nowrap">
+                  NGN {selectedMeal.price?.toLocaleString()}.00
+                </p>
+                <p className="">10-20 MIns</p>
+                <p className="">10 Pcs Avail</p>
+              </div>
+
+              <div className="flex justify-between w-full">
+                <div className="flex">
+                  <button
+                    className="bg-lily-sun w-12 h-16 text-lily-green text-2xl font-bold"
+                    onClick={() => decrement()}
+                  >
+                    -
+                  </button>
+                  <div className="bg-black/10 w-12 h-16 text-lily-green text-2xl text-center flex justify-center items-center font-semibold">
+                    {value}
+                  </div>
+                  <button
+                    className="bg-lily-sun w-12 h-16 text-lily-green text-2xl font-bold"
+                    onClick={() => increment()}
+                  >
+                    +
+                  </button>
+                </div>
+
+                <div>
+                  <button className="bg-lily-green px-8 h-16 text-white text-[13px] font-semibold">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="hidden md:flex justify-center items-center w-[50vw] lg:w-[36vw] flex-col px-14 pb-16">
+              <img
+                src={selectedMeal.image}
+                alt="meal-image"
+                className="w-60 h-60 mt-10 rounded-full object-cover flex-shrink-0"
+              />
+              <h1 className="text-lily-green font-semibold text-lg my-7">
+                {selectedMeal.name}
+              </h1>
+              <p className="text-black/70 text-[12px]/6 text-center">
+                {selectedMeal.description}
+              </p>
+
+              <div className="xl:flex items-center justify-between w-full my-10 text-lily-green font-semibold text-lg">
+                <p className="text-nowrap">
+                  NGN {selectedMeal.price?.toLocaleString()}.00
+                </p>
+                <p className="">10-20 MIns</p>
+                <p className="">10 Pcs Avail</p>
+              </div>
+
+              <div className="xl:flex justify-between w-full">
+                <div className="flex mb-7 lg:mb-7 xl:mb-0">
+                  <button
+                    className="bg-lily-sun w-12 h-16 text-lily-green text-2xl font-bold"
+                    onClick={() => decrement()}
+                  >
+                    -
+                  </button>
+                  <div className="bg-black/10 w-12 h-16 text-lily-green text-2xl text-center flex justify-center items-center font-semibold">
+                    {value}
+                  </div>
+                  <button
+                    className="bg-lily-sun w-12 h-16 text-lily-green text-2xl font-bold"
+                    onClick={() => increment()}
+                  >
+                    +
+                  </button>
+                </div>
+
+                <div>
+                  <button className="bg-lily-green w-36 h-16 text-white text-[13px] font-semibold">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </SideModal>
     </div>
   );
 }

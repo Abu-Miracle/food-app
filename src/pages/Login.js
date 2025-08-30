@@ -5,6 +5,11 @@ import { ArrowLeft } from "lucide-react";
 export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const handleSubmit = (e) => {
+  e.preventDefault();
+  navigate('/dashboard');
+};
+
 
   return (
     <div className="relative flex h-[100vh] md:flex-row">
@@ -29,6 +34,7 @@ export default function Login() {
         <form
           action=""
           method="post"
+          onSubmit={handleSubmit}
           className="flex flex-col w-[75%] justify-center"
         >
           <h1 className="text-[--lily-green] font-[600] text-[28px] text-center mb-10 md:mb-14">
@@ -39,12 +45,14 @@ export default function Login() {
             type="email"
             placeholder="Your Email Address"
             className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full mb-10 rounded"
+            required
           />
           <div className="relative mb-10">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Your Password"
               className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full rounded pr-16"
+              required
             />
             <button
               type="button"
@@ -55,13 +63,12 @@ export default function Login() {
             </button>
           </div>
 
-          <Link
-            to="/dashboard"
+          <button
             type="submit"
             className="w-full bg-lily-green text-lily-light font-semibold py-5 rounded hover:bg-lily-green/60 text-center"
           >
             LOGIN
-          </Link>
+          </button>
 
           <div className="w-full justify-between flex text-lily-green font-medium md:font-normal text-sm md:text-[15px] mt-4 md:mt-8">
             <Link to="/signup">Create an account</Link>

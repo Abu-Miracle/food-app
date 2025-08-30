@@ -1,4 +1,3 @@
-// SideModal.js
 import { useEffect } from "react";
 
 export default function SideModal({ isOpen, onClose, title, children }) {
@@ -15,11 +14,11 @@ export default function SideModal({ isOpen, onClose, title, children }) {
 
   return (
     <div
-      className="fixed inset-0 justify-end flex bg-black/50 w-[100vw]"
+      className="fixed inset-0 justify-end flex bg-black/50 w-[100vw] z-50"
       onClick={onClose}
     >
       <div
-        className="h-full w-full md:w-[60vw] lg:w-[50vw] bg-white flex flex-col pt-7 md:pt-16"
+        className="h-full w-full md:w-auto bg-white flex flex-col pt-7 md:pt-16"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center ">

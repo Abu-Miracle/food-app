@@ -14,6 +14,7 @@ export default function Menu() {
 
   const [isOrdersModalOpen, setIsOrdersModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
 
   const openModal = (content) => {
     setModalContent(content);
@@ -39,6 +40,14 @@ export default function Menu() {
 
   const closeCartModal = () => {
     setIsCartModalOpen(false);
+  };
+
+  const openCheckoutModal = () => {
+    setIsCheckoutModalOpen(true);
+  };
+
+  const closeCheckoutModal = () => {
+    setIsCheckoutModalOpen(false);
   };
 
   const handleItemClick = (item) => {
@@ -157,13 +166,13 @@ export default function Menu() {
 
             <div className="flex justify-between ">
               <button
-                className="rounded border-[1px] border-black/50 px-4 py-2"
+                className="rounded border-[1px] bg-gray-200 hover:bg-gray-100 px-4 py-2"
                 onClick={closeModal}
               >
                 Cancel
               </button>
               <button
-                className="bg-lily-green text-lily-light rounded px-4 py-2"
+                className="bg-red-700 hover:bg-red-800 text-white rounded px-4 py-2"
                 onClick={() => {
                   localStorage.removeItem("authToken");
                   navigate("/");
@@ -182,7 +191,7 @@ export default function Menu() {
         onClose={closeOrdersModal}
         title="Your Orders"
       >
-        <div className="px-16">
+        <div className="px-4 md:px-16">
           <div className="hidden md:grid grid-cols-10 gap-8 text-sm py-8 items-center">
             <div className="col-span-5 ">Items</div>
             <div className="col-span-1 text-center">Qty</div>
@@ -191,7 +200,44 @@ export default function Menu() {
           </div>
 
           {meals.slice(2, 6).map((meal, index) => (
-            <div key={index}>
+            <div key={index} className="mb-8 md:mb-4 px-4 md:px-0">
+              <div className="lex flex-col md:hidden bg-gray-100 px-8 py-4 rounded-lg">
+                <div className="flex items-center mb-3">
+                  <img
+                    src={meal.image}
+                    className="w-16 h-16 rounded-full object-cover mr-3 flex-shrink-0"
+                  />
+                  <div className="flex-1">
+                    <h1 className="text-lily-green font-[500] text-lg">
+                      {meal.name}
+                    </h1>
+                    <p className="text-xs text-red-600">Remove</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between w-full text-sm">
+                  <div className="flex flex-col">
+                    <span className=" text-gray-500 mb-1">Qty</span>
+                    <span className="font-bold text-lily-green">
+                      {meal.quantity}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className=" text-gray-500 mb-1">Price</span>
+                    <span className="font-bold text-lily-green">
+                      N{meal.price.toLocaleString()}.00
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className=" text-gray-500 mb-1">Status</span>
+                    <span
+                      className={`col-span-2 text-center font-medium tracking-wide ${meal.status === "delivered" ? "text-green-600" : "text-red-500"}`}
+                    >
+                      {meal.status === "delivered" ? "Delivered" : "Cooking"}
+                    </span>
+                  </div>
+                </div>
+              </div>
               <div className="hidden md:grid grid-cols-10 gap-8 items-center py-4">
                 <div className="col-span-5 flex items-center">
                   <img
@@ -206,6 +252,7 @@ export default function Menu() {
                     <p className="text-xs text-red-600">Remove</p>
                   </div>
                 </div>
+
                 <div className="col-span-1 text-center font-bold text-lily-green">
                   {meal.quantity}
                 </div>
@@ -216,43 +263,6 @@ export default function Menu() {
                   className={`col-span-2 text-center font-medium tracking-wide ${meal.status === "delivered" ? "text-green-600" : "text-red-500"}`}
                 >
                   {meal.status === "delivered" ? "Delivered" : "Cooking"}
-                </div>
-              </div>
-
-              <div className="block md:hidden bg-gray-50 rounded-lg p-4 mb-4">
-                <div className="flex items-center mb-3">
-                  <img
-                    src={meal.image}
-                    className="w-16 h-16 rounded-full object-cover mr-3 flex-shrink-0"
-                  />
-                  <div className="flex-1">
-                    <h1 className="text-lily-green font-[500] text-lg">
-                      {meal.name}
-                    </h1>
-                    <p className="text-xs text-red-600">Remove</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div className="text-center">
-                    <span className="block text-gray-500 mb-1">Qty</span>
-                    <span className="font-bold text-lily-green">
-                      {meal.quantity}
-                    </span>
-                  </div>
-                  <div className="text-center">
-                    <span className="block text-gray-500 mb-1">Price</span>
-                    <span className="font-bold text-lily-green">
-                      N{meal.price.toLocaleString()}.00
-                    </span>
-                  </div>
-                  <div className="text-center">
-                    <span className="block text-gray-500 mb-1">Status</span>
-                    <span
-                      className={`font-medium ${meal.status === "delivered" ? "text-green-600" : "text-red-500"}`}
-                    >
-                      {meal.status === "delivered" ? "Delivered" : "Cooking"}
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -274,8 +284,8 @@ export default function Menu() {
           </div>
 
           {meals.slice(0, 4).map((meal, index) => (
-            <div key={index} className="mb-8 md:mb-4">
-              <div className="block md:hidden">
+            <div key={index} className="mb-8 md:mb-4 px-4 md:px-0">
+              <div className="flex flex-col md:hidden bg-gray-100 px-8 py-4 rounded-lg">
                 <div className="flex items-center mb-3">
                   <img
                     src={meal.image}
@@ -288,21 +298,22 @@ export default function Menu() {
                     <p className="text-xs text-red-600">Remove</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div className="text-center">
-                    <span className="block text-gray-500 mb-1">Qty</span>
+
+                <div className="flex items-center justify-between w-full text-sm">
+                  <div className="flex flex-col">
+                    <span className=" text-gray-500 mb-1">Qty</span>
                     <span className="font-bold text-lily-green">
                       {meal.quantity}
                     </span>
                   </div>
-                  <div className="text-center">
-                    <span className="block text-gray-500 mb-1">Price</span>
+                  <div className="flex flex-col">
+                    <span className=" text-gray-500 mb-1">Price</span>
                     <span className="font-bold text-lily-green">
                       N{meal.price.toLocaleString()}.00
                     </span>
                   </div>
-                  <div className="text-center">
-                    <span className="block text-gray-500 mb-1">Sub-total</span>
+                  <div className="flex flex-col">
+                    <span className=" text-gray-500 mb-1">Sub-total</span>
                     <span className="font-bold text-lily-green">
                       N{(meal.quantity * meal.price).toLocaleString()}.00
                     </span>
@@ -345,11 +356,78 @@ export default function Menu() {
               N{total.toLocaleString()}.00
             </h1>
           </div>
-          <button className="bg-lily-green font-semibold rounded text-lily-light block mx-auto py-4 text-sm w-[80%] mt-10 mb-16">
+          <button className="bg-lily-green font-semibold rounded text-lily-light block mx-auto py-4 text-sm w-[80%] mt-10 mb-16"
+          onClick={() => {
+            openCheckoutModal();
+            closeCartModal();
+          }}
+          >
             Checkout
           </button>
         </div>
       </SideModal>
+
+      <SideModal
+  isOpen={isCheckoutModalOpen}
+  onClose={closeCheckoutModal}
+  title="Checkout"
+>
+  <div className="px-4 md:px-16 w-full md:w-[40vw]">
+    <div className="space-y-8 mt-2 md:mt-7">
+      <div>
+        <label className="text-lily-green text-sm" htmlFor="card-no">Card Number</label>
+         <input 
+         id="card-no"
+        type="number" 
+        maxLength="16"
+        placeholder="XXXX-XXXX-XXXX-XXXX"
+        className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
+        required
+      />
+      </div>
+      <div>
+        <label className="text-lily-green text-sm" htmlFor="exp-date">Exp Date</label>
+        <input 
+        id="exp-date"
+        type="date" 
+        className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
+        required
+      />
+      </div>
+      <div>
+        <label className="text-lily-green text-sm" htmlFor="cvv">CVV</label>
+        <input 
+        id="cvv"
+        type="number"
+        maxLength="3"
+        placeholder="E.g. 123"
+        className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
+        required
+      />
+      </div>
+      <div>
+        <label className="text-lily-green text-sm" htmlFor="card-pin">Card Pin</label>
+          <input 
+          id="card-pin"
+          maxLength="4"
+        type="password"
+        placeholder="E.g. 1234"
+        className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
+        required
+      />
+      </div>
+      
+      <button className="bg-lily-green  text-lily-light w-full py-4 rounded text-[14px] font-semibold"
+      onClick={() => {
+        closeCheckoutModal();
+        
+      }}
+      >
+        Make Payment
+      </button>
+    </div>
+  </div>
+</SideModal>
     </div>
   );
 }

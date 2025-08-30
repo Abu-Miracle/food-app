@@ -5,6 +5,10 @@ import { ArrowLeft } from "lucide-react";
 export default function SignUp() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const handleSubmit = (e) => {
+  e.preventDefault();
+  navigate('/dashboard');
+};
 
   return (
     <div className="relative flex h-[100vh] md:flex-row">
@@ -29,6 +33,7 @@ export default function SignUp() {
         <form
           action=""
           method="post"
+          onSubmit={handleSubmit}
           className="flex flex-col w-[75%] justify-center"
         >
           <h1 className="text-[--lily-green] font-[600] text-[28px] text-center mb-10 md:mb-14">
@@ -36,20 +41,23 @@ export default function SignUp() {
           </h1>
 
           <input
-            type="email"
+            type="text"
             placeholder="Your First Name"
             className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full mb-10 rounded"
+            required
           />
           <input
             type="email"
             placeholder="Your Email Address"
             className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full mb-10 rounded"
+            required
           />
           <div className="relative mb-10">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Your Password"
               className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full rounded pr-16"
+              required
             />
             <button
               type="button"
@@ -60,13 +68,12 @@ export default function SignUp() {
             </button>
           </div>
 
-          <Link
-            to="/dashboard"
+          <button
             type="submit"
             className="w-full bg-lily-green text-lily-light font-semibold py-5 rounded hover:bg-lily-green/60 text-center"
           >
             SIGNUP
-          </Link>
+          </button>
 
           <div className="w-full flex text-lily-green justify-center font-normal text-[15px] mt-8">
             <p>
