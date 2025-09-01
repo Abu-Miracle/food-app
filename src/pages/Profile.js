@@ -120,7 +120,7 @@ export default function Profile() {
           Personal Information
         </h3>
 
-        <div className="space-y-4 pl-4">
+        <div className="space-y-4 px-2 md:px-4">
           <div className="flex flex-col">
             <label htmlFor="fname" className="text-sm text-black/70 mb-2">
               First Name
@@ -270,7 +270,7 @@ export default function Profile() {
         </h3>
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between py-3 px-4 hover:bg-gray-50 rounded-lg cursor-pointer ">
+          <div className="flex items-center justify-between py-3 px-2 md:px-4 hover:bg-gray-50 rounded-lg cursor-pointer ">
             <div>
               <p className="font-medium text-black/80">Change Password</p>
               <p className="text-sm text-[#707070]">
@@ -280,7 +280,7 @@ export default function Profile() {
             <ArrowLeft className="rotate-180 text-[#707070]" size={16} />
           </div>
 
-          <div className="flex items-center justify-between py-3 px-4 hover:bg-gray-50 rounded-lg cursor-pointer ">
+          <div className="flex items-center justify-between py-3 px-2 md:px-4 hover:bg-gray-50 rounded-lg cursor-pointer ">
             <div>
               <p className="font-medium text-black/80">
                 Notification Preferences
@@ -292,7 +292,7 @@ export default function Profile() {
             <ArrowLeft className="rotate-180 text-[#707070]" size={16} />
           </div>
 
-          <div className="flex items-center justify-between py-3 px-4 hover:bg-gray-50 rounded-lg cursor-pointer ">
+          <div className="flex items-center justify-between py-3 px-2 md:px-4 hover:bg-gray-50 rounded-lg cursor-pointer ">
             <div>
               <p className="font-medium text-black/80">Privacy Settings</p>
               <p className="text-sm text-[#707070]">
