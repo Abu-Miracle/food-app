@@ -6,10 +6,9 @@ export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = (e) => {
-  e.preventDefault();
-  navigate('/dashboard');
-};
-
+    e.preventDefault();
+    navigate("/dashboard");
+  };
 
   return (
     <div className="relative flex h-[100vh] md:flex-row">

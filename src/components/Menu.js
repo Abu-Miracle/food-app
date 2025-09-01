@@ -356,11 +356,12 @@ export default function Menu() {
               N{total.toLocaleString()}.00
             </h1>
           </div>
-          <button className="bg-lily-green font-semibold rounded text-lily-light block mx-auto py-4 text-sm w-[80%] mt-10 mb-16"
-          onClick={() => {
-            openCheckoutModal();
-            closeCartModal();
-          }}
+          <button
+            className="bg-lily-green font-semibold rounded text-lily-light block mx-auto py-4 text-sm w-[80%] mt-10 mb-16"
+            onClick={() => {
+              openCheckoutModal();
+              closeCartModal();
+            }}
           >
             Checkout
           </button>
@@ -368,66 +369,74 @@ export default function Menu() {
       </SideModal>
 
       <SideModal
-  isOpen={isCheckoutModalOpen}
-  onClose={closeCheckoutModal}
-  title="Checkout"
->
-  <div className="px-4 md:px-16 w-full md:w-[40vw]">
-    <div className="space-y-8 mt-2 md:mt-7">
-      <div>
-        <label className="text-lily-green text-sm" htmlFor="card-no">Card Number</label>
-         <input 
-         id="card-no"
-        type="number" 
-        maxLength="16"
-        placeholder="XXXX-XXXX-XXXX-XXXX"
-        className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
-        required
-      />
-      </div>
-      <div>
-        <label className="text-lily-green text-sm" htmlFor="exp-date">Exp Date</label>
-        <input 
-        id="exp-date"
-        type="date" 
-        className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
-        required
-      />
-      </div>
-      <div>
-        <label className="text-lily-green text-sm" htmlFor="cvv">CVV</label>
-        <input 
-        id="cvv"
-        type="number"
-        maxLength="3"
-        placeholder="E.g. 123"
-        className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
-        required
-      />
-      </div>
-      <div>
-        <label className="text-lily-green text-sm" htmlFor="card-pin">Card Pin</label>
-          <input 
-          id="card-pin"
-          maxLength="4"
-        type="password"
-        placeholder="E.g. 1234"
-        className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
-        required
-      />
-      </div>
-      
-      <button className="bg-lily-green  text-lily-light w-full py-4 rounded text-[14px] font-semibold"
-      onClick={() => {
-        closeCheckoutModal();
-        
-      }}
+        isOpen={isCheckoutModalOpen}
+        onClose={closeCheckoutModal}
+        title="Checkout"
       >
-        Make Payment
-      </button>
-    </div>
-  </div>
-</SideModal>
+        <div className="px-4 md:px-16 w-full md:w-[40vw]">
+          <div className="space-y-8 mt-2 md:mt-7">
+            <div>
+              <label className="text-lily-green text-sm" htmlFor="card-no">
+                Card Number
+              </label>
+              <input
+                id="card-no"
+                type="number"
+                maxLength="16"
+                placeholder="XXXX-XXXX-XXXX-XXXX"
+                className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-lily-green text-sm" htmlFor="exp-date">
+                Exp Date
+              </label>
+              <input
+                id="exp-date"
+                type="date"
+                className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-lily-green text-sm" htmlFor="cvv">
+                CVV
+              </label>
+              <input
+                id="cvv"
+                type="number"
+                maxLength="3"
+                placeholder="E.g. 123"
+                className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-lily-green text-sm" htmlFor="card-pin">
+                Card Pin
+              </label>
+              <input
+                id="card-pin"
+                maxLength="4"
+                type="password"
+                placeholder="E.g. 1234"
+                className="w-full mt-3 px-4 py-2 border-[1px] text-[#a3a3a3]  outline-none border-[#a3a3a3]/70 rounded-md"
+                required
+              />
+            </div>
+
+            <button
+              className="bg-lily-green  text-lily-light w-full py-4 rounded text-[14px] font-semibold"
+              onClick={() => {
+                closeCheckoutModal();
+              }}
+            >
+              Make Payment
+            </button>
+          </div>
+        </div>
+      </SideModal>
     </div>
   );
 }

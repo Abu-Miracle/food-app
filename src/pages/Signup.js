@@ -6,9 +6,9 @@ export default function SignUp() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = (e) => {
-  e.preventDefault();
-  navigate('/dashboard');
-};
+    e.preventDefault();
+    navigate("/dashboard");
+  };
 
   return (
     <div className="relative flex h-[100vh] md:flex-row">
@@ -36,20 +36,26 @@ export default function SignUp() {
           onSubmit={handleSubmit}
           className="flex flex-col w-[75%] justify-center"
         >
-          <h1 className="text-[--lily-green] font-[600] text-[28px] text-center mb-10 md:mb-14">
+          <h1 className="text-[--lily-green] font-[600] text-[28px] text-center my-10 md:mb-14">
             Welcome to Lilies!
           </h1>
 
           <input
             type="text"
             placeholder="Your First Name"
-            className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full mb-10 rounded"
+            className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full mb-8 rounded"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Surname"
+            className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full mb-8 rounded"
             required
           />
           <input
             type="email"
             placeholder="Your Email Address"
-            className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full mb-10 rounded"
+            className="border-[0.25px] border-[--lily-light] outline-none text-sm px-5 py-5 w-full mb-8 rounded"
             required
           />
           <div className="relative mb-10">
