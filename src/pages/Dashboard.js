@@ -69,8 +69,8 @@ export default function Dashboard() {
 
       <div className="flex-1 overflow-y-auto">
         <div className="mt-28 px-8 lg:px-16 flex justify-between">
-          <div className="">
-            <h1 className="font-semibold text-[22px] text-lily-green">
+          <div className="w-[70%] md:w-full">
+            <h1 className="font-semibold text-[22px] mb-2 md:mb-0 text-lily-green">
               Good Morning, Oluwafemi!
             </h1>
             <p className="text-sm text-black/70">
@@ -83,7 +83,7 @@ export default function Dashboard() {
         </div>
 
         <div className="flex justify-center px-10 lg:px-16 mt-20 pb-10">
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl w-full justify-items-center">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 max-w-6xl w-full justify-items-center">
             {meals.map((meal, index) => (
               <div
                 key={index}
@@ -101,7 +101,7 @@ export default function Dashboard() {
                   {truncateText(meal.description)}
                 </p>
 
-                <div className="text-sm font-semibold mt-6 flex justify-between w-full">
+                <div className="text-sm font-semibold mt-6 ml-4 md:ml-0 md:flex md:justify-between w-full">
                   <p className="text-lily-green">
                     N{meal.price.toLocaleString()}.00
                   </p>
