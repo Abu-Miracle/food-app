@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AlignJustify, X } from "lucide-react";
 import Menu from "../components/Menu";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { meals } from "../meals";
 import SideModal from "../components/SideModal";
 
@@ -10,6 +10,7 @@ export default function Dashboard() {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState({});
   const [value, setValue] = useState(0);
+  const navigate = useNavigate();
 
   const closeDetailModal = () => {
     setIsDetailModalOpen(false);
@@ -76,9 +77,9 @@ export default function Dashboard() {
               What delicious meal are you craving today?
             </p>
           </div>
-          <Link to="/profile">
-            <img src="/images/pfp.svg" alt="pfp" />
-          </Link>
+          <button onClick={() => navigate('/profile')}>
+            <img src="/images/omar.jpg" alt="pfp" className="w-12 h-12 rounded-full hover:scale-110" />
+          </button>
         </div>
 
         <div className="flex justify-center px-10 lg:px-16 mt-20 pb-10">
