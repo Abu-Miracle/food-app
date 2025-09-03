@@ -40,14 +40,14 @@ export default function Profile() {
 
   return (
     <div className="pb-10">
-      <header className="flex px-10 md:px-14 py-7 items-center justify-between">
+      <header className="flex px-7 md:px-14 py-4 md:py-7 items-center justify-between">
         <div className="flex items-center">
           <ArrowLeft
-            size={20}
+            size={30}
             className="mr-2 cursor-pointer text-lily-green"
             onClick={() => navigate(-1)}
           />
-          <h1 className="font-semibold text-xl text-lily-green">
+          <h1 className="font-semibold text-lg md:text-xl text-lily-green">
             Your Profile
           </h1>
         </div>
