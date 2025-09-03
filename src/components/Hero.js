@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 
 export default function Hero() {
   return (
-    <div className="pl-10 py-32 md:py-20 md:px-24 flex items-center justify-between">
+    <div className="px-10 py-32 md:py-20 md:px-24 flex items-center justify-between">
       <motion.div
         className="max-w-[700px]"
         initial={{ opacity: 0, y: 20 }}
