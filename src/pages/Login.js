@@ -7,7 +7,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-    sessionStorage.setItem('loggedIn', 'true');
+    sessionStorage.setItem("loggedIn", "true");
     navigate("/dashboard");
   };
 

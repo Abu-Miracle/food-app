@@ -25,10 +25,11 @@ export default function SpecialMeals() {
 
   return (
     <div className="flex flex-col justify-center text-center items-center py-10 px-10 md:px-24">
-      <motion.div className="max-w-[500px] md:max-w-[700px] mb-14"
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.5 }}
+      <motion.div
+        className="max-w-[500px] md:max-w-[700px] mb-14"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.5 }}
       >
         <h1 className="text-white/85 text-2xl md:text-[34px] mb-5 md:mb-10 font-bold">
           Special Meals of the Day!
@@ -39,7 +40,8 @@ export default function SpecialMeals() {
         </p>
       </motion.div>
 
-      <motion.div className="grid grid-cols-1 lg:grid-cols-3 gap-14 md:gap-24 mb-10"
+      <motion.div
+        className="grid grid-cols-1 lg:grid-cols-3 gap-14 md:gap-24 mb-10"
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -51,24 +53,24 @@ export default function SpecialMeals() {
               staggerChildren: 0.5,
               duration: 1,
               ease: "easeInOut",
-            }
-          }
+            },
+          },
         }}
       >
         {special_meals.map((meal, index) => (
           <motion.div
             key={index}
             variants={{
-            hidden: { opacity: 0, y: 100 },
-            visible: {
-              opacity: 1, 
-              y: 0,
-              transition: {
-                duration: 1,
-                ease: "easeInOut",
-              } 
-            }
-          }}
+              hidden: { opacity: 0, y: 100 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 1,
+                  ease: "easeInOut",
+                },
+              },
+            }}
             className="flex flex-col md:justify-center md:items-center"
           >
             <img

@@ -5,36 +5,37 @@ export default function Updates() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-
   return (
-    <motion.div className="lg:flex pt-24 md:pt-44 pb-40 justify-center lg:justify-between items-center px-10 md:px-24"
-    ref={ref}
-    initial="hidden"
-    animate={isInView ? "visible" : "hidden"}
-    variants={{
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: {
-          staggerChildren: 0.5,
-          duration: 1,
-          ease: "easeInOut",
-        }
-      }
-    }}
-    >
-      <motion.div className="mr-20  md:max-w-[550px]"
+    <motion.div
+      className="lg:flex pt-24 md:pt-44 pb-40 justify-center lg:justify-between items-center px-10 md:px-24"
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
       variants={{
-      hidden: { opacity: 0, y: 100 },
-      visible: {
-        opacity: 1, 
-        y: 0,
-        transition: {
-          duration: 1,
-          ease: "easeInOut",
-        } 
-      }
-    }}
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.5,
+            duration: 1,
+            ease: "easeInOut",
+          },
+        },
+      }}
+    >
+      <motion.div
+        className="mr-20  md:max-w-[550px]"
+        variants={{
+          hidden: { opacity: 0, y: 100 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 1,
+              ease: "easeInOut",
+            },
+          },
+        }}
       >
         <h1 className="text-[--lily-light] font-bold text-3xl md:text-[34px] my-6">
           Get notified when we update!
@@ -45,18 +46,19 @@ export default function Updates() {
         </p>
       </motion.div>
 
-      <motion.div className="md:flex mt-5"
-      variants={{
-      hidden: { opacity: 0, y: 100 },
-      visible: {
-        opacity: 1, 
-        y: 0,
-        transition: {
-          duration: 1,
-          ease: "easeInOut",
-        } 
-      }
-    }}
+      <motion.div
+        className="md:flex mt-5"
+        variants={{
+          hidden: { opacity: 0, y: 100 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 1,
+              ease: "easeInOut",
+            },
+          },
+        }}
       >
         <input
           type="email"
