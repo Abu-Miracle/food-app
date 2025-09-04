@@ -1,6 +1,7 @@
-import { ArrowLeft, Edit2, Save, X, Camera } from "lucide-react";
+import { ArrowLeft, Edit3, Save, X, Camera } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../components/BackButton";
 
 export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
@@ -40,14 +41,14 @@ export default function Profile() {
 
   return (
     <div className="pb-10">
-      <header className="flex px-7 md:px-14 py-4 md:py-7 items-center justify-between">
+      <header className="flex px-6 md:px-14 py-4 md:py-7 items-center justify-between">
         <div className="flex items-center">
-          <ArrowLeft
-            size={30}
-            className="mr-2 cursor-pointer text-lily-green"
-            onClick={() => navigate(-1)}
-          />
-          <h1 className="font-semibold text-lg md:text-xl text-lily-green">
+          <button className="mr-1" 
+          onClick={() => navigate(-1)}
+          >
+            <BackButton />
+          </button>
+          <h1 className="font-medium text-[14px] md:text-lg text-lily-green">
             Your Profile
           </h1>
         </div>
@@ -55,10 +56,10 @@ export default function Profile() {
         {!isEditing ? (
           <button
             onClick={handleEdit}
-            className="flex items-center px-4 py-2 bg-lily-green text-lily-light rounded-lg hover:bg-lily-green/90  text-sm font-medium"
+            className="flex items-center text-lily-green rounded-lg text-[14px] md:text-lg font-medium"
           >
-            <Edit2 size={16} className="mr-2" />
-            Edit Profile
+            <Edit3 size={16} className="mr-2" />
+            Edit
           </button>
         ) : (
           <div className="hidden md:flex space-x-2">

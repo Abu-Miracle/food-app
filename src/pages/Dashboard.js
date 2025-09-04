@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AlignJustify, X } from "lucide-react";
+import { AlignJustify } from "lucide-react";
 import Menu from "../components/Menu";
 import { useNavigate } from "react-router-dom";
 import { meals } from "../meals";
@@ -47,7 +47,7 @@ export default function Dashboard() {
         className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        {!isMenuOpen && <AlignJustify size={24} className="bg-white" />}
+        {!isMenuOpen && <AlignJustify size={24} className="bg-transparent" />}
       </button>
 
       <div
@@ -87,7 +87,7 @@ export default function Dashboard() {
             {meals.map((meal, index) => (
               <div
                 key={index}
-                className="flex flex-col cursor-pointer py-4 px-4 items-center"
+                className="flex flex-col py-4 px-4 items-center"
               >
                 <img
                   src={meal.image}
@@ -106,7 +106,7 @@ export default function Dashboard() {
                     N{meal.price.toLocaleString()}.00
                   </p>
                   <p
-                    className="text-[#1c9e5d] hover:text-lily-green hover:scale-105"
+                    className="text-[#1c9e5d] hover:text-lily-green cursor-pointer hover:scale-105"
                     onClick={() => {
                       setSelectedMeal(meal);
                       setIsDetailModalOpen(true);
@@ -124,7 +124,7 @@ export default function Dashboard() {
       <SideModal isOpen={isDetailModalOpen} onClose={closeDetailModal} title="">
         {selectedMeal && (
           <div>
-            <div className="flex md:hidden justify-center items-center w-full flex-col px-14 pb-16">
+            <div className="flex md:hidden justify-center items-center w-full flex-col px-10 pb-16">
               <img
                 src={selectedMeal.image}
                 alt="meal-image"
@@ -137,7 +137,7 @@ export default function Dashboard() {
                 {selectedMeal.description}
               </p>
 
-              <div className="flex items-center justify-between w-full my-10 text-lily-green font-semibold text-lg">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full my-7 text-lily-green font-bold text-lg ">
                 <p className="text-nowrap">
                   NGN {selectedMeal.price?.toLocaleString()}.00
                 </p>

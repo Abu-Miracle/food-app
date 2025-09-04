@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import BackButton from "./BackButton";
 
 export default function SideModal({ isOpen, onClose, title, children }) {
   useEffect(() => {
@@ -23,21 +24,7 @@ export default function SideModal({ isOpen, onClose, title, children }) {
       >
         <div className="flex justify-between items-center ">
           <button className="block md:hidden p-2 ml-2" onClick={onClose}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="text-lily-green"
-            >
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <BackButton />
           </button>
 
           <h2 className="text-[16px] px-4 md:px-16 text-lily-green font-semibold">
